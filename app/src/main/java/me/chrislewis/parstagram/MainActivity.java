@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
-                if (e != null) {
+                if (e == null) {
                     Log.d("Login Activity", "Login Successful");
                 }
                 else {
