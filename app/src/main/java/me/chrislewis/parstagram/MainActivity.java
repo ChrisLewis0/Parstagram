@@ -1,5 +1,6 @@
 package me.chrislewis.parstagram;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -44,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
             public void done(ParseUser user, ParseException e) {
                 if (e == null) {
                     Log.d("Login Activity", "Login Successful");
+
+                    final Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    startActivity(intent);
                 }
                 else {
                     Log.d("Login Activity", "Login Failure");
