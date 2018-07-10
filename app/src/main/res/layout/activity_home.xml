@@ -10,9 +10,8 @@
         android:id="@+id/etBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/bLogOut"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="67dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name" />
@@ -21,9 +20,8 @@
         android:id="@+id/bSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/bRefresh"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="90dp"
         android:text="Post" />
 
     <Button
@@ -31,8 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="29dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="16dp"
         android:text="Refresh" />
 
     <Button
@@ -45,11 +43,19 @@
 
     <ImageView
         android:id="@+id/ivPreview"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
+        android:layout_width="204dp"
+        android:layout_height="225dp"
+        android:layout_below="@+id/etBody"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="209dp"
         app:srcCompat="@android:color/black" />
+
+    <Button
+        android:id="@+id/bCamera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="119dp"
+        android:text="Camera" />
 
 </RelativeLayout>

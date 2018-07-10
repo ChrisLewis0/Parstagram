@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -37,6 +38,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button bSubmit;
     private Button bRefresh;
     private Button bLogOut;
+    private Button bCamera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class HomeActivity extends AppCompatActivity {
         bSubmit = findViewById(R.id.bSubmit);
         bRefresh = findViewById(R.id.bRefresh);
         bLogOut = findViewById(R.id.bLogOut);
+        bCamera = findViewById(R.id.bCamera);
 
         bSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,12 +57,11 @@ public class HomeActivity extends AppCompatActivity {
                 final String description = etBody.getText().toString();
                 final ParseUser user = ParseUser.getCurrentUser();
 
-//                final File file = new File();
-//                final ParseFile parseFile = new ParseFile(file);
+                final ParseFile parseFile = new ParseFile(photoFile);
 
-                //createPost(description, user);
+                createPost(description, parseFile, user);
 
-                onLaunchCamera(view);
+
 
             }
         });
@@ -81,12 +83,19 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        bCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onLaunchCamera(view);
+            }
+        });
+
     }
 
-    private void createPost(String description, /* ParseFile imageFile,*/ ParseUser user) {
+    private void createPost(String description, ParseFile imageFile, ParseUser user) {
         final Post newPost = new Post();
         newPost.setDescription(description);
-        //newPost.setImage(imageFile);
+        newPost.setImage(imageFile);
         newPost.setUser(user);
 
         newPost.saveInBackground(new SaveCallback() {
