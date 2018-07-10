@@ -137,6 +137,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void done(List<Post> objects, ParseException e) {
                 if (e == null) {
+                    adapter.clear();
                     for(int i = 0; i < objects.size(); i++) {
                         Log.d("HomeActivity", "Post [" + i + "] = "
                                 + objects.get(i).getDescription()

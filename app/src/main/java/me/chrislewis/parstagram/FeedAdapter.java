@@ -72,4 +72,9 @@ public class FeedAdapter extends  RecyclerView.Adapter<FeedAdapter.ViewHolder>{
         }
     }
 
+    public void clear() {
+        posts.clear();
+        notifyDataSetChanged();
+    }
+
 }
