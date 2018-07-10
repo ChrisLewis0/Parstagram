@@ -6,31 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvFeed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
     <EditText
         android:id="@+id/etBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bLogOut"
-        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/bSubmit"
+        android:layout_alignParentStart="true"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name" />
 
     <Button
         android:id="@+id/bSubmit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bRefresh"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:text="Post" />
 
     <Button
         android:id="@+id/bRefresh"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="16dp"
+        android:layout_alignParentEnd="true"
         android:text="Refresh" />
 
     <Button
@@ -45,17 +51,16 @@
         android:id="@+id/ivPreview"
         android:layout_width="204dp"
         android:layout_height="225dp"
-        android:layout_below="@+id/etBody"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         app:srcCompat="@android:color/black" />
 
     <Button
         android:id="@+id/bCamera"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="119dp"
-        android:text="Camera" />
+        android:text="Cam" />
 
 </RelativeLayout>
