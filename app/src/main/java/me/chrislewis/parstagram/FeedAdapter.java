@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import me.chrislewis.parstagram.models.Post;
@@ -25,41 +27,34 @@ public class FeedAdapter extends  RecyclerView.Adapter<FeedAdapter.ViewHolder>{
         this.posts = posts;
     }
 
-
-    // creates and inflates new view
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        // get the context and create the inflater
         context = viewGroup.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        // create the view using the item_movie layout
         View movieView = inflater.inflate(R.layout.item_post, viewGroup, false);
-        // return a new ViewHolder
         return new ViewHolder(movieView);
     }
 
-    // binds an inflated view to a new item
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        // get the movie data at the specified position
         Post post = posts.get(i);
-        // populate the view with the movie data
+
         viewHolder.tvCaption.setText(post.getDescription());
+        viewHolder.tvUser.setText(post.getUser().getUsername());
+
+        Glide.with(context)
+                .load(post.getImage().getUrl())
+                .into(viewHolder.ivPost);
 
     }
 
-    // returns the total number of items in the list
     @Override
     public int getItemCount() {
         return posts.size();
     }
 
-    // class cannot be static
-    // implements View.OnClickListener
-    // create the viewholder as a static inner class
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        // track view objects
         ImageView ivPost;
         TextView tvUser;
         TextView tvCaption;
