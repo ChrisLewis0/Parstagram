@@ -26,28 +26,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        etUsername = findViewById(R.id.etUsername);
-        etPassword = findViewById(R.id.etPassword);
-        bLogin = findViewById(R.id.bLogin);
-        bSignUp = findViewById(R.id.bSignUp);
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            final Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
 
-        bLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String username = etUsername.getText().toString();
-                final String password = etPassword.getText().toString();
-                login(username, password);
-            }
-        });
+            etUsername = findViewById(R.id.etUsername);
+            etPassword = findViewById(R.id.etPassword);
+            bLogin = findViewById(R.id.bLogin);
+            bSignUp = findViewById(R.id.bSignUp);
 
-        bSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String username = etUsername.getText().toString();
-                final String password = etPassword.getText().toString();
-                signUp(username, password);
-            }
-        });
+            bLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final String username = etUsername.getText().toString();
+                    final String password = etPassword.getText().toString();
+                    login(username, password);
+                }
+            });
+
+            bSignUp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final String username = etUsername.getText().toString();
+                    final String password = etPassword.getText().toString();
+                    signUp(username, password);
+                }
+            });
+
+        }
 
     }
 
@@ -87,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Log.d("SignUp", "Sign Up Fail");
                     e.printStackTrace();
+
+                    // TODO Tell user if username taken
                 }
             }
         });
