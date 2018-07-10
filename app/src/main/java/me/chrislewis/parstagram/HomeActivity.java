@@ -1,5 +1,6 @@
 package me.chrislewis.parstagram;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -21,6 +22,7 @@ public class HomeActivity extends AppCompatActivity {
     private EditText etBody;
     private Button bSubmit;
     private Button bRefresh;
+    private Button bLogOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class HomeActivity extends AppCompatActivity {
         etBody = findViewById(R.id.etBody);
         bSubmit = findViewById(R.id.bSubmit);
         bRefresh = findViewById(R.id.bRefresh);
+        bLogOut = findViewById(R.id.bLogOut);
 
         bSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +52,16 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 loadPosts();
+            }
+        });
+
+        bLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ParseUser.logOut();
+                Intent intent = new Intent(HomeActivity.this, MainActivity.class) ;
+                startActivity(intent);
+                finish();
             }
         });
     }
