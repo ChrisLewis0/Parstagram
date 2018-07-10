@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="159dp"
+        android:layout_marginTop="67dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name" />
@@ -42,4 +42,14 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:text="Log Out" />
+
+    <ImageView
+        android:id="@+id/ivPreview"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="209dp"
+        app:srcCompat="@android:color/black" />
+
 </RelativeLayout>
