@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText etUsername;
     private EditText etPassword;
     private Button bLogin;
+    private Button bSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         bLogin = findViewById(R.id.bLogin);
+        bSignUp = findViewById(R.id.bSignUp);
 
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +37,15 @@ public class MainActivity extends AppCompatActivity {
                 final String username = etUsername.getText().toString();
                 final String password = etPassword.getText().toString();
                 login(username, password);
+            }
+        });
+
+        bSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String username = etUsername.getText().toString();
+                final String password = etPassword.getText().toString();
+                signUp(username, password);
             }
         });
 
@@ -52,6 +64,28 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else {
                     Log.d("Login Activity", "Login Failure");
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void signUp(String username, String password) {
+        ParseUser user = new ParseUser();
+
+        user.setUsername(username);
+        user.setPassword(password);
+
+        user.signUpInBackground(new SignUpCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    Log.d("SignUp", "Sign Up Success");
+
+                    final Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Log.d("SignUp", "Sign Up Fail");
                     e.printStackTrace();
                 }
             }
