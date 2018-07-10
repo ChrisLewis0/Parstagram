@@ -22,7 +22,10 @@ import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import me.chrislewis.parstagram.models.Post;
@@ -86,7 +89,11 @@ public class HomeActivity extends AppCompatActivity {
         bCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onLaunchCamera(view);
+                try {
+                    onLaunchCamera(view);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -133,11 +140,27 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    public void onLaunchCamera(View view) {
+    public void onLaunchCamera(View view) throws IOException {
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Create a File reference to access to future access
         photoFile = getPhotoFileUri(photoFileName);
+        // by this point we have the camera photo on disk
+        Bitmap rawTakenImage = BitmapFactory.decodeFile(photoFile.getPath());
+        // See BitmapScaler.java: https://gist.github.com/nesquena/3885707fd3773c09f1bb
+        Bitmap resizedBitmap = BitmapScaler.scaleToFitWidth(rawTakenImage, 300);
+
+        // Configure byte output stream
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        // Compress the image further
+        resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
+        // Create a new file for the resized bitmap (`getPhotoFileUri` defined above)
+        File resizedFile = getPhotoFileUri(photoFileName+ "_resized");
+        resizedFile.createNewFile();
+        FileOutputStream fos = new FileOutputStream(resizedFile);
+        // Write the bytes of the bitmap to file
+        fos.write(bytes.toByteArray());
+        fos.close();
 
         // wrap File object into a content provider
         // required for API >= 24
