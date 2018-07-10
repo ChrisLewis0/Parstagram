@@ -44,7 +44,6 @@ public class FeedAdapter extends  RecyclerView.Adapter<FeedAdapter.ViewHolder>{
         // get the movie data at the specified position
         Post post = posts.get(i);
         // populate the view with the movie data
-
         viewHolder.tvCaption.setText(post.getDescription());
 
     }
