@@ -8,11 +8,11 @@
 
     <ImageView
         android:id="@+id/ivPost"
-        android:layout_width="249dp"
-        android:layout_height="318dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="57dp"
+        android:layout_width="92dp"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="132dp"
         app:srcCompat="@android:color/black"
         tools:layout_editor_absoluteX="68dp"
         tools:layout_editor_absoluteY="59dp" />
@@ -33,4 +33,14 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="100dp"
         android:text="TextView" />
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true">
+
+    </FrameLayout>
+
 </RelativeLayout>

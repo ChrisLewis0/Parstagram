@@ -7,11 +7,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.FileProvider;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +18,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
@@ -29,9 +27,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
+import me.chrislewis.parstagram.models.ExampleFragment;
 import me.chrislewis.parstagram.models.Post;
 
 public class HomeActivity extends AppCompatActivity {
@@ -46,35 +43,42 @@ public class HomeActivity extends AppCompatActivity {
     private Button bLogOut;
     private Button bCamera;
 
-    ArrayList<Post> posts;
-    RecyclerView rvFeed;
-    FeedAdapter adapter;
-    private SwipeRefreshLayout swipeContainer;
+//    ArrayList<Post> posts;
+//    RecyclerView rvFeed;
+//    FeedAdapter adapter;
+//    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        posts = new ArrayList<>();
-        adapter = new FeedAdapter(posts);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        swipeContainer = findViewById(R.id.swipeContainer);
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                loadPosts();
-                swipeContainer.setRefreshing(false);
-            }
-        });
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+        ExampleFragment fragment = new ExampleFragment();
+        fragmentTransaction.add(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
 
-        rvFeed = findViewById(R.id.rvFeed);
-        rvFeed.setLayoutManager(new LinearLayoutManager(this));
-        rvFeed.setAdapter(adapter);
+//        posts = new ArrayList<>();
+//        adapter = new FeedAdapter(posts);
+//
+//        swipeContainer = findViewById(R.id.swipeContainer);
+//        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                loadPosts();
+//                swipeContainer.setRefreshing(false);
+//            }
+//        });
+//        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+//                android.R.color.holo_green_light,
+//                android.R.color.holo_orange_light,
+//                android.R.color.holo_red_light);
+//
+//        rvFeed = findViewById(R.id.rvFeed);
+//        rvFeed.setLayoutManager(new LinearLayoutManager(this));
+//        rvFeed.setAdapter(adapter);
 
         etBody = findViewById(R.id.etBody);
         bSubmit = findViewById(R.id.bSubmit);
@@ -114,7 +118,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        loadPosts();
+//        loadPosts();
 
     }
 
@@ -137,30 +141,30 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    private void loadPosts() {
-        final Post.Query postQuery = new Post.Query();
-        postQuery.getTop().withUser();
-
-        postQuery.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> objects, ParseException e) {
-                if (e == null) {
-                    adapter.clear();
-                    for(int i = 0; i < objects.size(); i++) {
-                        Log.d("HomeActivity", "Post [" + i + "] = "
-                                + objects.get(i).getDescription()
-                                + "username = " + objects.get(i).getUser().getUsername());
-                        posts.add(objects.get(i));
-                        adapter.notifyItemInserted(objects.size() - 1);
-                    }
-                }
-                else {
-                    Log.d("HomeActivity", "Post Callback Unsuccessful");
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+//    private void loadPosts() {
+//        final Post.Query postQuery = new Post.Query();
+//        postQuery.getTop().withUser();
+//
+//        postQuery.findInBackground(new FindCallback<Post>() {
+//            @Override
+//            public void done(List<Post> objects, ParseException e) {
+//                if (e == null) {
+//                    adapter.clear();
+//                    for(int i = 0; i < objects.size(); i++) {
+//                        Log.d("HomeActivity", "Post [" + i + "] = "
+//                                + objects.get(i).getDescription()
+//                                + "username = " + objects.get(i).getUser().getUsername());
+//                        posts.add(objects.get(i));
+//                        adapter.notifyItemInserted(objects.size() - 1);
+//                    }
+//                }
+//                else {
+//                    Log.d("HomeActivity", "Post Callback Unsuccessful");
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//    }
 
     public void onLaunchCamera(View view) throws IOException {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

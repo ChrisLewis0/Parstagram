@@ -1,6 +1,8 @@
 package me.chrislewis.parstagram;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,6 +11,7 @@ import com.bumptech.glide.Glide;
 
 import org.parceler.Parcels;
 
+import me.chrislewis.parstagram.models.ExampleFragment;
 import me.chrislewis.parstagram.models.Post;
 
 public class DetailsActivity extends AppCompatActivity {
@@ -27,6 +30,13 @@ public class DetailsActivity extends AppCompatActivity {
         tvUsername = findViewById(R.id.tvUsername);
         tvCaption = findViewById(R.id.tvCaption);
         ivPost = findViewById(R.id.ivPost);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        ExampleFragment fragment = new ExampleFragment();
+        fragmentTransaction.add(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
 
         post = Parcels.unwrap(getIntent().getParcelableExtra(Post.class.getSimpleName()));
 
