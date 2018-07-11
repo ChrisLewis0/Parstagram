@@ -15,13 +15,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import me.chrislewis.parstagram.models.Post;
 
 public class PostFragment extends Fragment {
 
@@ -31,6 +40,8 @@ public class PostFragment extends Fragment {
     File photoFile;
 
     ImageView ivPost;
+    EditText etCaption;
+    Button bSubmit;
 
     Context context;
 
@@ -42,12 +53,27 @@ public class PostFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         ivPost = view.findViewById(R.id.ivPost);
+
+
         context = getContext();
         try {
             onLaunchCamera(view);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        etCaption = view.findViewById(R.id.etCaption);
+        bSubmit = view.findViewById(R.id.bSubmit);
+        bSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String description = etCaption.getText().toString();
+                final ParseFile parseFile = new ParseFile(photoFile);
+                final ParseUser user = ParseUser.getCurrentUser();
+
+                createPost(description, parseFile, user);
+            }
+        });
     }
 
     public void onLaunchCamera(View view) throws IOException {
@@ -93,9 +119,28 @@ public class PostFragment extends Fragment {
                 }
                 ivPost.setImageBitmap(takenImage);
 
-            } else { // Result was a failure
+            } else {
                 Toast.makeText(context, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void createPost(String description, ParseFile imageFile, ParseUser user) {
+        final Post newPost = new Post();
+        newPost.setDescription(description);
+        newPost.setImage(imageFile);
+        newPost.setUser(user);
+
+        newPost.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    Log.d("HomeActivity", "Create Post Success");
+                }
+                else {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
