@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -42,13 +43,13 @@ public class HomeActivity extends AppCompatActivity {
 
     private EditText etBody;
     private Button bSubmit;
-    private Button bRefresh;
     private Button bLogOut;
     private Button bCamera;
 
     ArrayList<Post> posts;
     RecyclerView rvFeed;
     FeedAdapter adapter;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +59,25 @@ public class HomeActivity extends AppCompatActivity {
         posts = new ArrayList<>();
         adapter = new FeedAdapter(posts);
 
+        swipeContainer = findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadPosts();
+                swipeContainer.setRefreshing(false);
+            }
+        });
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
         rvFeed = findViewById(R.id.rvFeed);
         rvFeed.setLayoutManager(new LinearLayoutManager(this));
         rvFeed.setAdapter(adapter);
 
         etBody = findViewById(R.id.etBody);
         bSubmit = findViewById(R.id.bSubmit);
-        bRefresh = findViewById(R.id.bRefresh);
         bLogOut = findViewById(R.id.bLogOut);
         bCamera = findViewById(R.id.bCamera);
 
@@ -77,13 +90,6 @@ public class HomeActivity extends AppCompatActivity {
                 final ParseFile parseFile = new ParseFile(photoFile);
 
                 createPost(description, parseFile, user);
-            }
-        });
-
-        bRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadPosts();
             }
         });
 
@@ -107,6 +113,8 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
+
+        loadPosts();
 
     }
 

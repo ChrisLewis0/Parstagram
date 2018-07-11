@@ -1,6 +1,7 @@
 package me.chrislewis.parstagram;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -53,7 +56,7 @@ public class FeedAdapter extends  RecyclerView.Adapter<FeedAdapter.ViewHolder>{
         return posts.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         ImageView ivPost;
         TextView tvUser;
@@ -64,6 +67,18 @@ public class FeedAdapter extends  RecyclerView.Adapter<FeedAdapter.ViewHolder>{
             ivPost = itemView.findViewById(R.id.ivPost);
             tvUser = itemView.findViewById(R.id.tvUser);
             tvCaption = itemView.findViewById(R.id.tvCaption);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                Post tweet = posts.get(position);
+                Intent intent = new Intent(context, DetailsActivity.class);
+                intent.putExtra(Post.class.getSimpleName(), Parcels.wrap(tweet));
+                context.startActivity(intent);
+            }
         }
     }
 
