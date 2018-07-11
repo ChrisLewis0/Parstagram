@@ -19,7 +19,7 @@ import java.util.List;
 import me.chrislewis.parstagram.FeedAdapter;
 import me.chrislewis.parstagram.R;
 
-public class ExampleFragment extends Fragment {
+public class FeedFragment extends Fragment {
 
     ArrayList<Post> posts;
     RecyclerView rvFeed;
@@ -31,7 +31,7 @@ public class ExampleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_example, parent, false);
+        return inflater.inflate(R.layout.fragment_feed, parent, false);
 
     }
 

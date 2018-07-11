@@ -7,11 +7,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,10 +31,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import me.chrislewis.parstagram.models.ExampleFragment;
+import me.chrislewis.parstagram.models.FeedFragment;
 import me.chrislewis.parstagram.models.Post;
 
 public class HomeActivity extends AppCompatActivity {
+
+    BottomNavigationView bottomNavigationView;
 
     public final String APP_TAG = "MyCustomApp";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
@@ -43,11 +48,6 @@ public class HomeActivity extends AppCompatActivity {
     private Button bLogOut;
     private Button bCamera;
 
-//    ArrayList<Post> posts;
-//    RecyclerView rvFeed;
-//    FeedAdapter adapter;
-//    private SwipeRefreshLayout swipeContainer;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,69 +56,69 @@ public class HomeActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        ExampleFragment fragment = new ExampleFragment();
+        FeedFragment fragment = new FeedFragment();
         fragmentTransaction.add(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
 
-//        posts = new ArrayList<>();
-//        adapter = new FeedAdapter(posts);
-//
-//        swipeContainer = findViewById(R.id.swipeContainer);
-//        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//        etBody = findViewById(R.id.etBody);
+//        bSubmit = findViewById(R.id.bSubmit);
+        bLogOut = findViewById(R.id.bLogOut);
+//        bCamera = findViewById(R.id.bCamera);
+
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+
+//        bSubmit.setOnClickListener(new View.OnClickListener() {
 //            @Override
-//            public void onRefresh() {
-//                loadPosts();
-//                swipeContainer.setRefreshing(false);
+//            public void onClick(View view) {
+//                final String description = etBody.getText().toString();
+//                final ParseUser user = ParseUser.getCurrentUser();
+//
+//                final ParseFile parseFile = new ParseFile(photoFile);
+//
+//                createPost(description, parseFile, user);
 //            }
 //        });
-//        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-//                android.R.color.holo_green_light,
-//                android.R.color.holo_orange_light,
-//                android.R.color.holo_red_light);
 //
-//        rvFeed = findViewById(R.id.rvFeed);
-//        rvFeed.setLayoutManager(new LinearLayoutManager(this));
-//        rvFeed.setAdapter(adapter);
+//        bLogOut.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ParseUser.logOut();
+//                Intent intent = new Intent(HomeActivity.this, MainActivity.class) ;
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
+//
+//        bCamera.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                try {
+//                    onLaunchCamera(view);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 
-        etBody = findViewById(R.id.etBody);
-        bSubmit = findViewById(R.id.bSubmit);
-        bLogOut = findViewById(R.id.bLogOut);
-        bCamera = findViewById(R.id.bCamera);
-
-        bSubmit.setOnClickListener(new View.OnClickListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                final String description = etBody.getText().toString();
-                final ParseUser user = ParseUser.getCurrentUser();
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_home:
+                        // do something here
+                        return true;
+                    case R.id.action_camera:
+                        // do something here
+                        return true;
+                    case R.id.action_profile:
+                        // do something here
+                        return true;
+                    default:
+                        return true;
 
-                final ParseFile parseFile = new ParseFile(photoFile);
-
-                createPost(description, parseFile, user);
-            }
-        });
-
-        bLogOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ParseUser.logOut();
-                Intent intent = new Intent(HomeActivity.this, MainActivity.class) ;
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        bCamera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    onLaunchCamera(view);
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
         });
-
-//        loadPosts();
 
     }
 
@@ -141,30 +141,6 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-//    private void loadPosts() {
-//        final Post.Query postQuery = new Post.Query();
-//        postQuery.getTop().withUser();
-//
-//        postQuery.findInBackground(new FindCallback<Post>() {
-//            @Override
-//            public void done(List<Post> objects, ParseException e) {
-//                if (e == null) {
-//                    adapter.clear();
-//                    for(int i = 0; i < objects.size(); i++) {
-//                        Log.d("HomeActivity", "Post [" + i + "] = "
-//                                + objects.get(i).getDescription()
-//                                + "username = " + objects.get(i).getUser().getUsername());
-//                        posts.add(objects.get(i));
-//                        adapter.notifyItemInserted(objects.size() - 1);
-//                    }
-//                }
-//                else {
-//                    Log.d("HomeActivity", "Post Callback Unsuccessful");
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//    }
 
     public void onLaunchCamera(View view) throws IOException {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

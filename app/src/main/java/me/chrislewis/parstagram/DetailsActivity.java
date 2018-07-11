@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide;
 
 import org.parceler.Parcels;
 
-import me.chrislewis.parstagram.models.ExampleFragment;
+import me.chrislewis.parstagram.models.FeedFragment;
 import me.chrislewis.parstagram.models.Post;
 
 public class DetailsActivity extends AppCompatActivity {
@@ -34,7 +34,7 @@ public class DetailsActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        ExampleFragment fragment = new ExampleFragment();
+        FeedFragment fragment = new FeedFragment();
         fragmentTransaction.add(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
 
