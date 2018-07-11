@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide;
 
 import org.parceler.Parcels;
 
-import me.chrislewis.parstagram.models.FeedFragment;
 import me.chrislewis.parstagram.models.Post;
 
 public class DetailsActivity extends AppCompatActivity {

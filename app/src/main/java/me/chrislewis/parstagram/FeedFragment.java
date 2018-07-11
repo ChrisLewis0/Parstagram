@@ -1,4 +1,4 @@
-package me.chrislewis.parstagram.models;
+package me.chrislewis.parstagram;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,8 +16,7 @@ import com.parse.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.chrislewis.parstagram.FeedAdapter;
-import me.chrislewis.parstagram.R;
+import me.chrislewis.parstagram.models.Post;
 
 public class FeedFragment extends Fragment {
 

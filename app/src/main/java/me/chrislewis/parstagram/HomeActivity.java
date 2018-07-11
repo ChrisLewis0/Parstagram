@@ -31,7 +31,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import me.chrislewis.parstagram.models.FeedFragment;
 import me.chrislewis.parstagram.models.Post;
 
 public class HomeActivity extends AppCompatActivity {
@@ -48,17 +47,25 @@ public class HomeActivity extends AppCompatActivity {
     private Button bLogOut;
     private Button bCamera;
 
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+    FeedFragment feedFragment;
+    PostFragment postFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
 
-        FeedFragment fragment = new FeedFragment();
-        fragmentTransaction.add(R.id.fragment_container, fragment);
-        fragmentTransaction.commit();
+        feedFragment = new FeedFragment();
+        fragmentTransaction.add(R.id.fragment_container, feedFragment);
+//        fragmentTransaction.commit();
+
+        postFragment = new PostFragment();
+        fragmentTransaction.add(R.id.fragment_container, postFragment);
 
 //        etBody = findViewById(R.id.etBody);
 //        bSubmit = findViewById(R.id.bSubmit);
@@ -105,17 +112,19 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_home:
-                        // do something here
+                        fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container, feedFragment).commit();
                         return true;
                     case R.id.action_camera:
-                        // do something here
+                        fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container, postFragment).commit();
+
                         return true;
                     case R.id.action_profile:
                         // do something here
                         return true;
                     default:
                         return true;
-
                 }
             }
         });
