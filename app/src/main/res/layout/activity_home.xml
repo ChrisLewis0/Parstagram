@@ -6,25 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-
-    <!--<EditText-->
-        <!--android:id="@+id/etBody"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_above="@+id/bSubmit"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:ems="10"-->
-        <!--android:inputType="textPersonName"-->
-        <!--android:text="Name" />-->
-
-    <!--<Button-->
-        <!--android:id="@+id/bSubmit"-->
-        <!--android:layout_width="50dp"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:text="Post" />-->
-
     <Button
         android:id="@+id/bLogOut"
         android:layout_width="wrap_content"
@@ -32,21 +13,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:text="Log Out" />
-
-    <ImageView
-        android:id="@+id/ivPreview"
-        android:layout_width="204dp"
-        android:layout_height="225dp"
-        android:layout_alignParentEnd="true"
-        app:srcCompat="@android:color/black" />
-
-    <!--<Button-->
-        <!--android:id="@+id/bCamera"-->
-        <!--android:layout_width="50dp"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:text="Cam" />-->
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
