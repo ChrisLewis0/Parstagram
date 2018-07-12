@@ -77,7 +77,7 @@ public class FeedAdapter extends  RecyclerView.Adapter<FeedAdapter.ViewHolder>{
                 Post tweet = posts.get(position);
                 Intent intent = new Intent(context, DetailsActivity.class);
                 intent.putExtra(Post.class.getSimpleName(), Parcels.wrap(tweet));
-                context.startActivity(intent);
+                view.getContext().startActivity(intent);
             }
         }
     }
