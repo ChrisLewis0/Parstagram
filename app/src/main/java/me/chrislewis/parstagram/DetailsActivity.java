@@ -39,8 +39,6 @@ public class DetailsActivity extends AppCompatActivity {
 
         tvCreatedAt.setText(createdAt);
 
-
-
         Glide.with(getApplicationContext())
                 .load(post.getImage().getUrl())
                 .into(ivPost);

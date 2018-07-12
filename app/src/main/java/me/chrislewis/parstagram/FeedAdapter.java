@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.parceler.Parcels;
 
@@ -20,12 +21,9 @@ import me.chrislewis.parstagram.models.Post;
 
 public class FeedAdapter extends  RecyclerView.Adapter<FeedAdapter.ViewHolder>{
 
-    // list of movies
     ArrayList<Post> posts;
-    // context for rendering;
     Context context;
 
-    // initialize the list
     public FeedAdapter(ArrayList<Post> posts) {
         this.posts = posts;
     }
@@ -44,11 +42,15 @@ public class FeedAdapter extends  RecyclerView.Adapter<FeedAdapter.ViewHolder>{
 
         viewHolder.tvCaption.setText(post.getDescription());
         viewHolder.tvUser.setText(post.getUser().getUsername());
+        viewHolder.tvCreatedAt.setText(post.getRelativeTimeAgo());
 
         Glide.with(context)
                 .load(post.getImage().getUrl())
                 .into(viewHolder.ivPost);
-
+        Glide.with(context)
+                .load(post.getUser().getParseFile("profilePic").getUrl())
+                .apply(new RequestOptions().circleCrop())
+                .into(viewHolder.ivProfilePic);
     }
 
     @Override
@@ -59,14 +61,18 @@ public class FeedAdapter extends  RecyclerView.Adapter<FeedAdapter.ViewHolder>{
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         ImageView ivPost;
+        ImageView ivProfilePic;
         TextView tvUser;
         TextView tvCaption;
+        TextView tvCreatedAt;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ivPost = itemView.findViewById(R.id.ivPost);
+            ivProfilePic = itemView.findViewById(R.id.ivProfileImage);
             tvUser = itemView.findViewById(R.id.tvUser);
             tvCaption = itemView.findViewById(R.id.tvCaption);
+            tvCreatedAt = itemView.findViewById(R.id.tvCreatedAt);
             itemView.setOnClickListener(this);
         }
 

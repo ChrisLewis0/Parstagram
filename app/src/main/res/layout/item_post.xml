@@ -74,4 +74,14 @@
         android:layout_below="@+id/ivPost"
         android:background="@drawable/ufi_save_icon" />
 
+    <TextView
+        android:id="@+id/tvCreatedAt"
+        android:layout_width="wrap_content"
+        android:layout_height="49dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
+        android:layout_alignBottom="@+id/ivProfileImage"
+        android:text="TextView" />
+
 </RelativeLayout>
