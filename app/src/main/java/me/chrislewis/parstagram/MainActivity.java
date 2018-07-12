@@ -1,6 +1,7 @@
 package me.chrislewis.parstagram;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,6 +17,8 @@ import com.parse.SignUpCallback;
 
 public class MainActivity extends AppCompatActivity {
 
+    AnimationDrawable animationDrawable;
+
     private EditText etUsername;
     private EditText etPassword;
     private Button bLogin;
@@ -25,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // onCreate
+        animationDrawable = (AnimationDrawable) findViewById(R.id.relativeLayout).getBackground();
+        animationDrawable.setEnterFadeDuration(5000);
+        animationDrawable.setExitFadeDuration(2000);
 
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
@@ -78,6 +86,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (animationDrawable != null && !animationDrawable.isRunning()) {
+            animationDrawable.start();
+        }
     }
 
     private void signUp(String username, String password) {
