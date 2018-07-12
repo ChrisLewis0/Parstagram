@@ -26,7 +26,8 @@ public class FeedFragment extends Fragment {
     private SwipeRefreshLayout swipeContainer;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent,
+                             Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_feed, parent, false);
     }
 

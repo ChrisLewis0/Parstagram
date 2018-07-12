@@ -67,7 +67,8 @@ public class MainActivity extends AppCompatActivity {
                 if (e == null) {
                     Log.d("Login Activity", "Login Successful");
 
-                    final Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    final Intent intent =
+                            new Intent(MainActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -90,7 +91,8 @@ public class MainActivity extends AppCompatActivity {
                 if (e == null) {
                     Log.d("SignUp", "Sign Up Success");
 
-                    final Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    final Intent intent =
+                            new Intent(MainActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
                 } else {

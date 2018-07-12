@@ -46,7 +46,8 @@ public class PostFragment extends Fragment {
     Context context;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_post, container, false);
     }
 
@@ -81,7 +82,8 @@ public class PostFragment extends Fragment {
         Fragment frag = this;
         photoFile = getPhotoFileUri(photoFileName);
 
-        Uri fileProvider = FileProvider.getUriForFile(context, "com.codepath.fileprovider", photoFile);
+        Uri fileProvider = FileProvider
+                .getUriForFile(context, "com.codepath.fileprovider", photoFile);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
 
         if (intent.resolveActivity(context.getPackageManager()) != null) {
@@ -90,7 +92,8 @@ public class PostFragment extends Fragment {
     }
 
     public File getPhotoFileUri(String fileName) {
-        File mediaStorageDir = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), APP_TAG);
+        File mediaStorageDir =
+                new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), APP_TAG);
         if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
             Log.d(APP_TAG, "failed to create directory");
         }
