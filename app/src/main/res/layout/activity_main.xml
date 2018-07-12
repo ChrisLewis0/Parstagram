@@ -10,40 +10,56 @@
 
     <EditText
         android:id="@+id/etUsername"
-        android:layout_width="wrap_content"
+        android:layout_width="299dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="74dp"
+        android:layout_marginTop="208dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:hint="Username"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="155dp"
+        android:layout_alignLeft="@+id/etUsername"
+        android:layout_alignRight="@+id/etUsername"
+        android:layout_below="@+id/etUsername"
+        android:layout_centerInParent="true"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/bLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="323dp"
+        android:layout_height="37dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="216dp"
+        android:layout_marginBottom="121dp"
+        android:background="@android:color/holo_blue_bright"
         android:text="Login" />
 
     <Button
         android:id="@+id/bSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:layout_alignLeft="@+id/bLogin"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="164dp"
+        android:layout_alignRight="@id/bLogin"
+        android:layout_marginBottom="70dp"
+        android:background="@android:color/holo_green_light"
         android:text="SignUp" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="286dp"
+        android:layout_height="65dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="107dp"
+        android:background="@drawable/nux_dayone_landing_logo"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
 </RelativeLayout>

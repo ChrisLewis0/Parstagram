@@ -7,11 +7,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.parse.ParseUser;
 
 public class ProfileFragment extends Fragment {
 
+    ParseUser user;
+
+    private static final String KEY_IMAGE = "profilePic";
+
+
+    TextView tvUsername;
+    ImageView ivProfilePic;
     Button bLogOut;
 
     @Override
@@ -22,6 +31,19 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+
+        user = ParseUser.getCurrentUser();
+
+        tvUsername = view.findViewById(R.id.tvUsername);
+        tvUsername.setText(user.getUsername());
+
+//        Log.d("Frag", ParseUser.getCurrentUser().getParseFile("profilePic").getUrl());
+//        ivProfilePic = view.findViewById(R.id.ivProfileImage);
+//        Glide.with(view)
+//                .load(user.getParseFile("profilePic").getUrl())
+//                .apply(new RequestOptions().circleCrop())
+//                .into(ivProfilePic);
+
         bLogOut = view.findViewById(R.id.bLogOut);
         bLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
