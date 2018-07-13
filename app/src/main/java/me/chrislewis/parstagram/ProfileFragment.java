@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.parse.ParseUser;
 
 public class ProfileFragment extends Fragment {
@@ -37,12 +39,11 @@ public class ProfileFragment extends Fragment {
         tvUsername = view.findViewById(R.id.tvUsername);
         tvUsername.setText(user.getUsername());
 
-//        Log.d("Frag", ParseUser.getCurrentUser().getParseFile("profilePic").getUrl());
-//        ivProfilePic = view.findViewById(R.id.ivProfileImage);
-//        Glide.with(view)
-//                .load(user.getParseFile("profilePic").getUrl())
-//                .apply(new RequestOptions().circleCrop())
-//                .into(ivProfilePic);
+        ivProfilePic = view.findViewById(R.id.ivProfileImage);
+        Glide.with(view)
+                .load(user.getParseFile("profilePic").getUrl())
+                .apply(new RequestOptions().circleCrop())
+                .into(ivProfilePic);
 
         bLogOut = view.findViewById(R.id.bLogOut);
         bLogOut.setOnClickListener(new View.OnClickListener() {
