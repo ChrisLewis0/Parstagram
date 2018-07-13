@@ -8,10 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
 import org.parceler.Parcels;
 
@@ -19,12 +17,12 @@ import java.util.ArrayList;
 
 import me.chrislewis.parstagram.models.Post;
 
-public class FeedAdapter extends  RecyclerView.Adapter<FeedAdapter.ViewHolder>{
+public class ProfileAdapter extends  RecyclerView.Adapter<ProfileAdapter.ViewHolder>{
 
     ArrayList<Post> posts;
     Context context;
 
-    public FeedAdapter(ArrayList<Post> posts) {
+    public ProfileAdapter(ArrayList<Post> posts) {
         this.posts = posts;
     }
 
@@ -32,7 +30,7 @@ public class FeedAdapter extends  RecyclerView.Adapter<FeedAdapter.ViewHolder>{
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         context = viewGroup.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View feedView = inflater.inflate(R.layout.item_post, viewGroup, false);
+        View feedView = inflater.inflate(R.layout.item_grid, viewGroup, false);
         return new ViewHolder(feedView);
     }
 
@@ -40,17 +38,9 @@ public class FeedAdapter extends  RecyclerView.Adapter<FeedAdapter.ViewHolder>{
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Post post = posts.get(i);
 
-        viewHolder.tvCaption.setText(post.getDescription());
-        viewHolder.tvUser.setText(post.getUser().getUsername());
-        viewHolder.tvCreatedAt.setText(post.getRelativeTimeAgo());
-
         Glide.with(context)
                 .load(post.getImage().getUrl())
                 .into(viewHolder.ivPost);
-        Glide.with(context)
-                .load(post.getUser().getParseFile("profilePic").getUrl())
-                .apply(new RequestOptions().circleCrop())
-                .into(viewHolder.ivProfilePic);
     }
 
     @Override
@@ -61,18 +51,11 @@ public class FeedAdapter extends  RecyclerView.Adapter<FeedAdapter.ViewHolder>{
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         ImageView ivPost;
-        ImageView ivProfilePic;
-        TextView tvUser;
-        TextView tvCaption;
-        TextView tvCreatedAt;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
             ivPost = itemView.findViewById(R.id.ivPost);
-            ivProfilePic = itemView.findViewById(R.id.ivProfileImage);
-            tvUser = itemView.findViewById(R.id.tvUser);
-            tvCaption = itemView.findViewById(R.id.tvCaption);
-            tvCreatedAt = itemView.findViewById(R.id.tvCreatedAt);
             itemView.setOnClickListener(this);
         }
 
