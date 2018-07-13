@@ -10,28 +10,28 @@
         android:id="@+id/etCaption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/ivPost"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="170dp"
+        android:layout_marginBottom="5dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:hint="Caption"
+        android:inputType="none" />
 
     <ImageView
         android:id="@+id/ivPost"
-        android:layout_width="214dp"
-        android:layout_height="249dp"
+        android:layout_width="270dp"
+        android:layout_height="360dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp"
+        android:layout_margin="10dp"
         android:src="@android:color/black" />
 
     <Button
         android:id="@+id/bSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/etCaption"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="59dp"
-        android:text="Button" />
+        android:layout_marginTop="10dp"
+        android:text="Post" />
 </RelativeLayout>

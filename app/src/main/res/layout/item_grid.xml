@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/ivPost"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
         app:srcCompat="@android:color/black"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="16dp" />

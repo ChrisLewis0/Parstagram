@@ -1,45 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:context=".DetailsActivity">
-
-    <ImageView
-        android:id="@+id/ivPost"
-        android:layout_width="238dp"
-        android:layout_height="207dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="64dp"
-        app:srcCompat="@android:color/black"
-        tools:layout_editor_absoluteX="68dp"
-        tools:layout_editor_absoluteY="59dp" />
-
-    <TextView
-        android:id="@+id/tvUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
 
     <TextView
         android:id="@+id/tvCaption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="100dp"
+        android:layout_alignLeft="@+id/ivProfileImage"
+        android:layout_alignRight="@+id/tvCreatedAt"
+        android:layout_below="@+id/ibLike"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignBottom="@+id/ivProfileImage"
+        android:layout_alignTop="@+id/ivProfileImage"
+        android:layout_toEndOf="@+id/ivProfileImage"
+        android:gravity="center_vertical"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/tvCreatedAt"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="49dp"
+        android:layout_alignBottom="@+id/ivProfileImage"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignTop="@+id/ivProfileImage"
+        android:layout_margin="5dp"
+        android:gravity="center_vertical"
         android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/ivPost"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:layout_below="@+id/tvUsername"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@android:color/black"
+        tools:layout_editor_absoluteX="176dp"
+        tools:layout_editor_absoluteY="102dp" />
+
+    <ImageView
+        android:id="@+id/ivProfileImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp"
+        app:srcCompat="@android:color/black" />
+
+    <ImageButton
+        android:id="@+id/ibLike"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ivPost"
+        android:layout_margin="5dp"
+        android:background="@drawable/ufi_heart_icon" />
+
+    <ImageButton
+        android:id="@+id/ibComment"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/ivPost"
+        android:layout_margin="5dp"
+        android:layout_toEndOf="@+id/ibLike"
+        android:background="@drawable/ufi_comment" />
+
+    <ImageButton
+        android:id="@+id/ibMessage"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/ivPost"
+        android:layout_margin="5dp"
+        android:layout_toEndOf="@+id/ibComment"
+        android:background="@drawable/direct" />
+
+    <ImageButton
+        android:id="@+id/ibBookmark"
+        android:layout_width="25dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/ivPost"
+        android:layout_margin="10dp"
+        android:background="@drawable/ufi_save_icon"
+        android:tint="@android:color/black" />
 
 </RelativeLayout>

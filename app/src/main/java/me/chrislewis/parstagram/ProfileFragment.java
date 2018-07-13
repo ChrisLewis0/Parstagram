@@ -91,9 +91,6 @@ public class ProfileFragment extends Fragment {
                 if (e == null) {
                     adapter.clear();
                     for(int i = 0; i < objects.size(); i++) {
-//                        Log.d("HomeActivity", "Post [" + i + "] = "
-//                                + objects.get(i).getDescription()
-//                                + "username = " + objects.get(i).getUser().getUsername());
                         posts.add(objects.get(i));
                         adapter.notifyItemInserted(objects.size() - 1);
                     }
