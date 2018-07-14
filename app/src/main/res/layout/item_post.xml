@@ -9,10 +9,10 @@
 
     <ImageView
         android:id="@+id/ivPost"
-        android:layout_width="300dp"
-        android:layout_height="400dp"
-        android:layout_centerHorizontal="true"
+        android:layout_width="270dp"
+        android:layout_height="360dp"
         android:layout_below="@+id/tvUsername"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         app:srcCompat="@android:color/black"
@@ -35,7 +35,17 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/ivProfileImage"
         android:layout_alignRight="@+id/tvCreatedAt"
+        android:layout_below="@+id/tvLikes"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvLikes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ivProfileImage"
+        android:layout_alignRight="@+id/tvCreatedAt"
         android:layout_below="@+id/ibLike"
+        android:layout_marginTop="0dp"
         android:text="TextView" />
 
     <ImageView

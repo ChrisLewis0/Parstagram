@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,12 +38,36 @@ public class FeedAdapter extends  RecyclerView.Adapter<FeedAdapter.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Post post = posts.get(i);
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
+        final Post post = posts.get(i);
 
         viewHolder.tvCaption.setText(post.getDescription());
         viewHolder.tvUser.setText(post.getUser().getUsername());
         viewHolder.tvCreatedAt.setText(post.getRelativeTimeAgo());
+        viewHolder.tvLikes.setText(post.getLikes() + " likes");
+
+        if (post.isLiked()){
+            viewHolder.ibLike.setBackgroundResource(R.drawable.ufi_heart_active);
+        }
+        else
+        {
+            viewHolder.ibLike.setBackgroundResource(R.drawable.ufi_heart);
+        }
+
+        viewHolder.ibLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                post.onLike();
+                if (post.isLiked()){
+                    viewHolder.ibLike.setBackgroundResource(R.drawable.ufi_heart_active);
+                }
+                else
+                {
+                    viewHolder.ibLike.setBackgroundResource(R.drawable.ufi_heart);
+                }
+                viewHolder.tvLikes.setText(post.getLikes() + " likes");
+            }
+        });
 
         Glide.with(context)
                 .load(post.getImage().getUrl())
@@ -62,17 +87,22 @@ public class FeedAdapter extends  RecyclerView.Adapter<FeedAdapter.ViewHolder>{
 
         ImageView ivPost;
         ImageView ivProfilePic;
+        ImageButton ibLike;
         TextView tvUser;
         TextView tvCaption;
         TextView tvCreatedAt;
+        TextView tvLikes;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ivPost = itemView.findViewById(R.id.ivPost);
             ivProfilePic = itemView.findViewById(R.id.ivProfileImage);
+            ibLike = itemView.findViewById(R.id.ibLike);
             tvUser = itemView.findViewById(R.id.tvUsername);
             tvCaption = itemView.findViewById(R.id.tvCaption);
             tvCreatedAt = itemView.findViewById(R.id.tvCreatedAt);
+            tvLikes = itemView.findViewById(R.id.tvLikes);
+
             itemView.setOnClickListener(this);
         }
 
