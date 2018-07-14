@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         animationDrawable = (AnimationDrawable) findViewById(R.id.relativeLayout).getBackground();
-        animationDrawable.setEnterFadeDuration(5000);
-        animationDrawable.setExitFadeDuration(2000);
+        animationDrawable.setEnterFadeDuration(500);
+        animationDrawable.setExitFadeDuration(200);
 
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {

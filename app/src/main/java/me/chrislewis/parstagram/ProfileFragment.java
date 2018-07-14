@@ -61,10 +61,12 @@ public class ProfileFragment extends Fragment {
         tvUsername.setText(user.getUsername());
 
         ivProfilePic = view.findViewById(R.id.ivProfileImage);
-        Glide.with(view)
-                .load(user.getParseFile("profilePic").getUrl())
-                .apply(new RequestOptions().circleCrop())
-                .into(ivProfilePic);
+        if (user.getParseFile("profilePic") != null) {
+            Glide.with(view)
+                    .load(user.getParseFile("profilePic").getUrl())
+                    .apply(new RequestOptions().circleCrop())
+                    .into(ivProfilePic);
+        }
 
         bLogOut = view.findViewById(R.id.bLogOut);
         bLogOut.setOnClickListener(new View.OnClickListener() {

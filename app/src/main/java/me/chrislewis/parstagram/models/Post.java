@@ -52,17 +52,19 @@ public class Post extends ParseObject{
 
     public boolean isLiked() {
         boolean liked = false;
-        JSONArray likeArray = ParseUser.getCurrentUser().getJSONArray("likes");
-        for(int i = 0; i < likeArray.length(); i++){
-            try {
-                if((getObjectId()).equals(likeArray.getString(i))) {
-                    liked = true;
+        if (ParseUser.getCurrentUser().getJSONArray("likes") != null) {
+            JSONArray likeArray = ParseUser.getCurrentUser().getJSONArray("likes");
+            for (int i = 0; i < likeArray.length(); i++) {
+                try {
+                    if ((getObjectId()).equals(likeArray.getString(i))) {
+                        liked = true;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
+            Log.d("Likes", String.valueOf(liked));
         }
-        Log.d("Likes", String.valueOf(liked));
         return liked;
     }
 
